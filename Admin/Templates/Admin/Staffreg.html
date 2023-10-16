@@ -1,4 +1,6 @@
+{% extends 'Admin/Header.html' %}
 {% load static %}
+{% block content%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +17,7 @@
 
 body{
     display: flex;
-    height: 100vh;
-    justify-content: center;
+    height: 130vh;
     align-items: center;
     background: url("{% static 'pricing3.jpg' %}");
     background-size: cover;
@@ -224,3 +225,4 @@ body{
     </div>
 </body>
 </html>
+{% endblock content %}
