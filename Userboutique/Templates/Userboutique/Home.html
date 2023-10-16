@@ -1,0 +1,850 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Inter&family=Playfair:opsz,wght@5..1200,300&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<style>
+    *{
+	font-family:'Playfair Display', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+	border: none;
+	text-decoration: none;
+	transition: all .2s linear;
+   }
+html{
+	font-size: 62.5%;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	scroll-padding-top: 6rem;
+   }
+html::-webkit-scrollbar{
+	width: .6rem;	
+   }
+html::-webkit-scrollbar-track{
+	background-color: #fff;
+}
+html::-webkit-scrollbar-thumb{
+	background-color: #8a6d46;
+}
+section{
+	padding: 5rem 7%;
+}
+.heading{
+	text-align: center;
+	color: #8a6d46;
+	text-transform: capitalize;
+	margin-bottom: 3rem;
+	margin-top: 3rem;
+	font-size:4rem;
+}
+/* header */
+.header{
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
+	box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+	position: sticky;
+	top: 0;
+	left:0; 
+	right: 0;
+	background:#d7c7ae;
+	z-index: 1000;
+}
+.header .logo{
+	font-size: 2.5rem;
+	font-weight: bolder;
+	color: #000;
+	text-transform: capitilize;
+}
+.header .navbar #close-navbar{
+	position: absolute;
+	top: 1.5rem;
+	right:2rem;
+	font-size: 4rem;
+	cursor: pointer;
+	color: #000;
+	display: none;
+}
+.header .navbar a{
+	font-size: 2rem;
+	margin-left: 2rem;
+	color: #000;
+	text-transform: capitalize;
+}
+.header .navbar a:hover{
+	padding-bottom: 0.5rem;
+	color:#8a6d46;
+}
+#menu-btn{
+	font-size: 2.5rem;
+	cursor:pointer;
+	color: #000;
+}
+/*header end*/
+/* home start */
+.home{
+	min-height:100vh;
+	display: flex;
+	align-items: center;
+	background: url("{% static 'bg.jpg' %}");
+	background-size: cover;
+	position: center;
+}
+.home .content{
+	max-width: 60rem;
+}
+.home .content span{
+	font-size:3rem;
+	letter-spacing: .5rem;
+	padding-bottom: .5rem;
+	color:#8a6d46;
+	text-transform: uppercase;
+}
+.home .content h3{
+	color: #000;
+	font-size: 8rem;
+	line-height: 8rem;
+	font-weight:900;
+}
+/* home */
+/* about us */
+.about{
+	background-image: url("{% static 'about4.jpg' %}");
+	background-repeat: no-repeat;
+	background-position: left bottom;
+}
+.about .row{
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.about .row .image{
+	flex: 1 1 39rem;
+}
+.about .row .image img{
+	width: 100%;
+}
+.about .row .content{
+	flex: 1 1 51rem;
+	padding: 5rem;
+}
+.about .row .content h3{
+	font-size: 3rem;
+	text-transform: capitalize;
+	color: #8a6d46;
+}
+.about .row .content p{
+	font-size: 1.6rem;
+	color: #444;
+	padding: 1rem 0;
+	line-height: 1.8;
+}
+.about .row .content .icons-container{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	margin-top: 3rem;
+}
+.about .row .content .icons-container .icons{
+	flex: 1 1 16rem;
+	text-align:center;
+	background: #f3efec;
+	padding: 3rem 2rem;
+}
+.about .row .content .icons-container .icons img{
+	height: 5rem;
+}
+.about .row .content .icons-container .icons h3{
+	padding-top: 1rem;
+	font-size: 1.6rem;
+	color: #444;
+	font-weight: normal;
+	text-transform: capitalize;
+}
+/* about */
+/* services */
+.services{
+	background-color: #d7c7ae;
+}
+.services .box-container{
+	display: grid;
+	grid-template-columns: repeat(auto-fit,minmax(25rem, 1fr));
+	gap:2rem;
+}
+.services .box-container .box{
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+.services .box-container .box img{
+	height: 70%;
+	width: 70%;
+	object-fit:cover;
+}
+.services .box-container .box:hover img{
+	transform: scale(1.1);
+}
+.services .box-container .box .content{
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	height: 70%;
+	width: 70%;
+	background: rgba(0,0,0,.7);
+	display: none;
+}
+.services .box-container .box .content h3{
+	text-align: center;
+	font-size: 2rem;
+	color: #999;
+	padding-top: -20rem;
+	text-transform: capitalize;
+}
+.services .box-container .box:hover .content{
+	display: flex;
+}
+/* Services */
+/* styles */
+.style{
+	background: #f3efec;
+}
+.style .box-container{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(25rem,1fr));
+	gap: 1.5rem;
+}
+.style .box-container .box .image{
+	overflow: hidden;
+	width: 100%;
+	text-align: center;
+}
+.style .box-container .box .image img{
+	object-fit: cover;
+	width: 80%;
+	height:80%;
+}
+.style .box-container .box .content{
+	text-align: center;
+}
+.style .box-container .box .content .title{
+	font-size: 2.5rem;
+	color: #8a6d46;
+	text-transform: capitalize;
+}
+.style .box-container .box .content p{
+	font-size: 1.6rem;
+	line-height: 1.8;
+	color: #444;
+	padding: 1rem 0;
+}
+/* styles*/
+/* pricing */
+.pricing{
+	background-image: url("{% static 'pricing3.jpg' %}");
+	background-attachment: fixed;
+}
+.pricing .box-container{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+.pricing .box-container .box{
+	height: 500px;
+	width: 200px;
+	margin: 20px 40px;
+	border-radius: 10px;
+	box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+	text-align: center;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+	background: #8a6d46;
+}
+.pricing .box-container .box::before,
+.pricing .box-container .box::after{
+	content: ' ';
+	position: absolute;
+	height: 200px;
+	width: 200px;
+	border-radius: 50%;
+	opacity: .5;
+}
+.pricing .box-container .box::before{
+	background: #f3efec;
+	top: -10%;
+	left:80%;
+}
+.pricing .box-container .box::after{
+	background: #d7c7ae;
+	top: -10%;
+	right:80%;
+}
+.pricing .box-container .box .title{
+	margin: 30px 0;
+	font-size: 26px;
+	color:  #d7c7ae;
+	text-transform: capitalize;
+}
+.pricing .box-container .box .price{
+	height:160px;
+	width:160px;
+	color: #fff;
+	background-color: #d7c7ae;
+	padding: 57px 0 0;
+	margin: 0 auto 25px;
+	border-radius: 50%;
+}
+.pricing .box-container .box .price .currency{
+	font-size: 35px;
+	line-height:35px;
+	font-weight: 300;
+}
+.pricing .box-container .box .price .amount{
+	font-size: 58px;
+	line-height:45px;
+	font-weight: 700;
+}
+.pricing .box-container .box ul li{
+	text-align: left;
+	font-size: 16px;
+	padding-left: 15px;
+	margin: 20px auto;
+	color: #fff;
+	list-style: none;
+	text-transform: uppercase;
+}
+.pricing .box-container .box ul li i{
+	color: #d7c7ae;
+	padding: 0 10px;
+}
+.pricing .box-container .box button{
+	height: 40px;
+	width: 140px;
+	outline: none;
+	border-radius: 50px;
+	text-transform: capitalize;
+	cursor: pointer;
+	background: none;
+	color: #d7c7ae;
+	border: 2px solid #d7c7ae;
+	font-size: 17px;
+	font-weight: bold;
+}
+.pricing .box-container .box button:hover{
+	color: #fff;
+	background: #d7c7ae;
+}
+/* pricing */
+/* blogs */
+.blogs .box-container{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+	gap: 3rem;
+}
+.blogs .box-container .box{
+	background: #8a6d46;
+}
+.blogs .box-container .box .image{
+	height: 25rem;
+	width: 100%;
+	overflow: hidden;
+}
+.blogs .box-container .box .image img{
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+.blogs .box-container .box:hover .image img{
+	transform: scale(1.2);
+}
+.blogs .box-container .box .content{
+	padding: 2rem
+}
+.blogs .box-container .box .content .title{
+	font-size: 2.5rem;
+	line-height: 1.5;
+	color: #fff;
+	text-transform: capitalize;
+}
+.blogs .box-container .box .content .title:hover{
+	color: #d7c7ae;
+}
+.blogs .box-container .box .content span{
+	color: #d7c7ae;
+	display: block;
+	padding-top: 1rem;
+	font-size:2rem;
+	text-transform: capitalize;
+}
+.blogs .box-container .box .content  p{
+	font-size: 1.6rem;
+	line-height: 1.8;
+	color: #fff;
+	padding: 1rem 0;	
+}
+.review .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+    gap: 1.5rem;
+}
+.review .box-container .box{
+    border: .1rem solid #aaa;
+    text-align: center;
+    padding: 2rem 0rem;
+}
+.review .box-container .box p{
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: #000;
+    padding: 2rem 0;
+}
+.review .box-container .box h3{
+    padding: 1rem 0;
+    font-size: 2rem;
+    color: #000;
+    text-transform: capitalize;
+}
+.review .box-container .box .stars i{
+	font-size: 1.5rem;
+	color: #f3f708;
+}
+/* footer */
+.footer{
+	background: #8a6d46;
+	text-align: center;
+}
+.footer .box-container{
+	display: grid;
+	grid-template-columns: repeat(auto-fit,minmax(30rem, 1fr));
+	gap: 2rem;
+}
+.footer .box-container .box h3{
+	font-size: 2.2rem;
+	text-transform: capitalize;
+	color: #d7c7ae;
+	padding: 1rem 0;
+}
+.footer .box-container .box p{
+	font-size: 1.5rem;
+	line-height: 2;
+	color: #000;
+	padding: 1rem 0;
+}
+.footer .box-container .box .share{
+	margin-top: 1rem;
+}
+.footer .box-container .box .share a{
+	height: 4.5rem;
+	width: 4.5rem;
+	line-height: 4.5rem;
+	border-radius: 50%;
+	font-size: 1.7rem;
+	background-color: #d7c7ae;
+	color: #000;
+	margin-right: .3rem;
+	text-align: center;
+}
+.footer .box-container .box .share a:hover{
+	background: #726e6e;
+}
+.footer .box-container .box .link{
+	font-size: 1.7rem;
+	line-height: 2;
+	color: #d7c7ae;
+	padding: .5rem 0;
+	display: block;
+	text-decoration: underline;
+}
+.footer .box-container .box .link:hover{
+	color: #000;
+	text-decoration: underline;
+}
+.footer .credict{
+	text-align: center;
+	margin-top: 3rem;
+	padding-top: 3rem;
+	font-size: 2rem;
+	text-transform: capitalize;
+	color: #444;
+	border-top: 0.1rem solid #aaa;
+}
+.footer .credict span{
+	color: #aaa;
+}
+/* footer */
+
+@media (max-width:991px){
+	html{
+		font-size: 55%;
+	}
+	.header .navbar a{
+		font-size: 1.7rem;
+	}
+	section{
+		padding: 3rem 2rem;
+	}
+}
+@media (max-width:768px){
+	#menu-btn{
+		display: inline-block;
+	}
+	.header .navbar{
+		position: fixed;
+		top: 0; right: -105%;
+		width: 30rem;
+		background: #fff;
+		height: 100%;
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		z-index: 1200;
+	}
+	.header .navbar #close-navbar{
+		display: block;
+	}
+	.header .navbar .active{
+		right: 0;
+	}
+	.header .navbar a{
+		display: block;
+		margin: 1rem 0;
+		text-align: center;
+		font-size: 3rem;
+	}
+	.home .content h3{
+		font-size: 5.5rem;
+	}
+}
+@media (max-width:450px){
+	html{
+		font-size: 50%;
+	}
+	.home .content h3{
+		font-size: 4.5rem;
+	}
+}
+</style>
+<body>
+    <!-- Header -->
+    <section class="header">
+        <a href="#" class="logo">Lavender Beauty</a>
+
+        <nav class="navbar">
+            <div id="close-navbar" class="fas fa-times"></div>
+
+            <a href="{% url 'Userboutique:Userboutique' %}">Home</a>
+            <a href="#">Services</a>
+            <a href="#">Styles</a>
+            <a href="#">Pricing</a>
+            <a href="#">Blogs</a>
+            <a href="#">Review</a>
+            <a href="#">About</a>
+			<a href="#">Logout</a>
+
+        </nav>
+         <div  id="menu-btn" class="fas fa-bars"></div>
+    </section>
+<!--Header-->
+<!--Home-->
+<section class="home" id="home">
+      <div class="content">
+        <span>Welcome</span>
+	<h3>We make<br>hair beautiful<br>& unique</h3>
+     </div>
+</section>
+<!--Home-->
+<!--About us-->
+<section class="about" id="about">
+         <h1 class="heading">About us</h1>
+        <div class="row">
+	<div class="image">
+	      <img src="{% static 'about.jpg' %}" alt=""> 
+	</div>
+	<div class="content">
+	      <h3 class="title">We are a group of stylist</h3>
+		<p>Beauty comes from inside, inside the beauty salon.</p>
+		<p>Sometimes all we need is a little pampering to help us feel better</p>
+		<div class="icons-container">
+		      <div class="icons">
+		         <img src="{% static 'about1.png' %}">
+		         <h3>Professional tools</h3>
+		       </div>
+		      <div class="icons">
+		         <img src="{% static 'about2.png' %}">
+		         <h3>Quality tools</h3>
+		       </div>
+		      <div class="icons">
+		         <img src="{% static 'about3.png' %}">
+		         <h3>Hair washing</h3>
+		       </div>
+		</div>
+	</div>
+        </div>
+</section>
+<!--Services-->
+<section class="services" id="services">
+	<h1 class="heading">Premium Services</h1>
+		<div class="box-container">
+			<div class="box">
+				<img src="{% static 'service1.jpg' %}" alt="">
+				<div class="content">
+				<h3>Hair Styling</h3>
+				</div>
+			</div>
+			<div class="box">
+				<img src="{% static 'service2.jpg' %}" alt="">
+				<div class="content">
+				<h3>Wedding services</h3>
+				</div>
+			</div>
+			<div class="box">
+				<img src="{% static 'service3.jpg' %}" alt="">
+				<div class="content">
+				<h3>Ladies haircut</h3>
+				</div>
+			</div>
+			<div class="box">
+				<img src="{% static 'service4.jpg' %}" alt="">
+				<div class="content">
+				<h3>Manicures, Pedicures Application</h3>
+				</div>
+			</div>
+		</div>
+</section>
+<!--Service-->
+<!--Styles-->
+<section class="style" id="styles">
+	<h1 class="heading">Choose your styles</h1>
+		<div class="box-container">
+			<div class="box">
+				<div class="image">
+					<img src="{% static 'style1.jpg' %}" alt="">
+				</div>
+				<div class="content">
+					<h3 class="title">Wedding hairstyles</h3>
+					<p>Massage is not just a luxury, it’s a way to a happier, healthier life</p>
+				</div>
+			</div>
+			<div class="box">
+				<div class="image">
+					<img src="{% static 'style2.jpg' %}" alt="">
+				</div>
+				<div class="content">
+					<h3 class="title">Evening hairstyles</h3>
+					<p>Massage is not just a luxury, it’s a way to a happier, healthier life</p>
+				</div>
+			</div>
+			<div class="box">
+				<div class="image">
+					<img src="{% static 'style3.jpg' %}" alt="">
+				</div>
+				<div class="content">
+					<h3 class="title">Party hairstyles</h3>
+					<p>Massage is not just a luxury, it’s a way to a happier, healthier life</p>
+				</div>
+			</div>
+			<div class="box">
+				<div class="image">
+					<img src="{% static 'style4.jpg' %}" alt="">
+				</div>
+				<div class="content">
+					<h3 class="title">Business hairstyles</h3>
+					<p>Massage is not just a luxury, it’s a way to a happier, healthier life</p>
+				</div>
+			</div>
+		</div>
+</section>
+<!--Styles-->
+<!--Pricing-->
+<section class="pricing" id="pricing">
+	<h1 class="heading">Offer and Pricing</h1>
+	<div class="box-container">
+		<div class="box">
+		<h3 class="title">Basic</h3>
+			<div class="price">
+				<span class="currency">$</span>
+				<span class="amount">10</span>
+			</div>
+			<ul>
+				<li><i class="fas fa-check"></i>Simple haircut</li>
+				<li><i class="fas fa-check"></i>Hair plugs</li>
+				<li><i class="fas fa-check"></i>Styling</li>
+				<li><i class="fas fa-check"></i>Braiding</li>
+			</ul>
+			<a href="#"><button>Book a visit</button></a>
+		</div>
+		<div class="box">
+		<h3 class="title">Standard</h3>
+			<div class="price">
+				<span class="currency">$</span>
+				<span class="amount">20</span>
+			</div>
+			<ul>
+				<li><i class="fas fa-check"></i>Simple haircut</li>
+				<li><i class="fas fa-check"></i>Hair plugs</li>
+				<li><i class="fas fa-check"></i>Styling</li>
+				<li><i class="fas fa-check"></i>Braiding</li>
+			</ul>
+			<a href="#"><button>Book a visit</button></a>
+		</div>
+		<div class="box">
+		<h3 class="title">Premium</h3>
+			<div class="price">
+				<span class="currency">$</span>
+				<span class="amount">30</span>
+			</div>
+			<ul>
+				<li><i class="fas fa-check"></i>Simple haircut</li>
+				<li><i class="fas fa-check"></i>Hair plugs</li>
+				<li><i class="fas fa-check"></i>Styling</li>
+				<li><i class="fas fa-check"></i>Braiding</li>
+			</ul>
+			<a href="#"><button>Book a visit</button></a>
+		</div>
+	</div>
+</section>
+<!--Pricing-->
+<!--Blogs-->
+<section class="blogs" id="blogs">
+	<h1 class="heading">Our Blogs</h1>
+	<div class="box-container">
+		<div class="box">
+			<div class="image">
+				<img src="{% static 'blog.jpg' %}" alt="">
+			</div>
+			<div class="content">
+				<a href="#" class="title">Styling hair services</a>
+				<span>By Admin / 13th July, 2023</span>
+				<p>Blessed are the hairstylists, for they bring out the beauty in others.</p>
+			</div>
+		</div>
+		<div class="box">
+			<div class="image">
+				<img src="{% static 'blog1.jpg' %}" alt="">
+			</div>
+			<div class="content">
+				<a href="#" class="title">Styling hair services</a>
+				<span>By Admin / 13th July, 2023</span>
+				<p>I never dreamed about success. I worked for it.</p>
+			</div>
+		</div>
+		<div class="box">
+			<div class="image">
+				<img src="{% static 'blog2.jpg' %}" alt="">
+			</div>
+			<div class="content">
+				<a href="#" class="title">Styling hair services</a>
+				<span>By Admin / 13th July, 2023</span>
+				<p>Be nice to your hairstylist. We can ruin your self-esteem for six months in fifteen minutes.</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!--Blogs-->
+<!--Reviews-->
+<section class="review" id="review">
+    <h1 class="heading">Customer's review</h1>
+    <div class="box-container">
+        <div class="box">
+            <img src="images/quotes.jpg" alt="" class="quote">
+            <p>Success is when I see my client smile.</p>
+            <img src="{% static 'review1.jpg' %}" alt="">
+            <h3>Diya Saju</h3>
+            <div class="stars">
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/quotes.jpg" alt="" class="quote">
+            <p>Success is when I see my client smile.</p>
+            <img src="{% static 're.jpg' %}" alt="">
+            <h3>Jenny Mathew</h3>
+            <div class="stars">
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/quotes.jpg" alt="" class="quote">
+            <p>Success is when I see my client smile.</p>
+            <img src="{% static 'review2.jpg' %}" alt="">
+            <h3>Clara Eiden</h3>
+            <div class="stars">
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Review-->
+<!--Footer-->
+<section class="footer">
+	<div class="box-container">
+		<div class="box">
+			<h3>Find us here</h3>
+			<p>Lavender Herbal Beauty Parlour</p>
+			<div class="share">
+				<a href="#" class="fab fa-facebook"></a>
+				<a href="#" class="fab fa-instagram"></a>
+				<a href="#" class="fab fa-youtube"></a>
+			</div>
+		</div>
+		<div class="box">
+			<h3>Contact Us</h3>
+			<p>+91-7038738392</p>
+			<a href="#" class="link">lavenderbeauty@gmail.com</a>
+		</div>
+		<div class="box">
+			<h3>Localization</h3>
+			<p>Lavender Herbal Beauty Parlour,
+				Near Old Private Bus Stand,<br>
+				Perumbavoor
+			</p>
+		</div>
+	</div>
+	<div class="credict">
+		Created by Divya Benjamin
+	</div>
+</section>
+</body>
+</html>
+<script>
+	let navbar = document.querySelector('.header .navbar');
+	let menuBtn = document.querySelector('#menu-btn');
+	let closeBtn = document.querySelector('#close-navbar');
+
+	menuBtn.onclick = () =>{
+		navbar.classList.add('active');
+	}
+
+	closeBtn.onclick = () =>{
+		navbar.classList.remove('active');
+	}
+
+	window.onclick = () =>{
+		navbar.classList.remove('active');
+	}
+</script>

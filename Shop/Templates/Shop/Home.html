@@ -1,0 +1,499 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautyparlour-Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Inter&family=Playfair:opsz,wght@5..1200,300&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<style>
+   *{
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style-type: none;
+        box-sizing: border-box;
+   } 
+   #sidebar-toggle{
+        display: none;
+   }
+   .sidebar{
+        height: 100%;
+        width: 240px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        background-color: #eebd1bc9;
+        color: #fff;
+        padding: 1rem;
+        overflow-y: auto;
+        transition: width 500ms;
+   }
+   .sidebar-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        padding: 0rem 1rem;
+   }
+   .sidebar-menu{
+        padding: 1rem;
+   }
+   .sidebar li{
+        margin-bottom: 1.2rem;
+   }
+   .sidebar a{
+        color: #615a08;
+        font-size: .9rem;
+   }
+   .sidebar a span:last-child{
+        padding-left: .6rem;
+   }
+   #sidebar-toggle:checked~ .sidebar{
+        width: 60px;
+   }
+   #sidebar-toggle:checked~ .sidebar .sidebar-header h3 span,
+   #sidebar-toggle:checked~ .sidebar li span:last-child{
+        display: none;
+   }
+   #sidebar-toggle:checked~ .sidebar .sidebar-header,
+   #sidebar-toggle:checked~ .sidebar li {
+        display: flex;
+        justify-content: center;
+   }
+   #sidebar-toggle:checked~ .main-content{
+        margin-left: 180px;
+   }
+   .main-content{
+        position: relative;
+        margin-left: 240px;
+        transition: margin-left 500ms;
+   }
+   header{
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        width: calc(100% - 240px);
+        background: #fff;
+        height: 60px;
+        padding: 0rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #8398A2 ;
+   }
+   .search-wrapper{
+        display: flex;
+        align-items: center;
+   }
+   .search-wrapper input{
+        border: 0;
+        outline: 0;
+        padding: 1rem;
+        height: 38px;
+   }
+   .social-icons{
+        display: flex;
+   }
+   .social-icons span, .social-icons div{
+        margin-left: 1.2rem;
+   }
+   .social-icons div{
+        height: 40px;
+        width: 40px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url("{% static 'img.png' %}");
+   }
+   .dash-title{
+        color: #1D2231;
+        margin-bottom: 1rem;
+   }
+   .dash-card{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 3rem;
+   }
+   .card-single{
+        background: #fff;
+        border-radius: 7px;
+        box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+   }
+   .card-body{
+        padding: 1.3rem 1rem;
+        display: flex;
+        align-items: center;
+   }
+   .card-body span{
+        font-size: 1.5rem;
+        color: #777;
+        padding-right: 1.4rem;
+   }
+   .card-body h5{
+        color: #8398A2;
+        font-size: 1rem;
+   }
+   .card-body h4{
+        color: #1D2231;
+        font-size: 1.1rem;
+        margin-top: .2rem;
+   }
+   .card-footer{
+        padding: .2rem 1rem;
+        background: #f9fafc;
+   }
+   .card-footer a{
+        color: #1D2231;
+   }
+   main{
+        margin-top: 60px;
+        background: #f6f3e3;
+        min-height: 90vh;
+        padding: 1rem;
+   }
+   .recent{
+        margin-top: 3rem;
+   }
+   .summary-single i{
+        display: grid;
+        grid-template-columns: 70% 30%;
+        grid-column-gap: 1.5rem;
+   }
+   .activity-card,.summary-single{
+        background: #fff;
+        border-radius: 7px;
+   }
+   .activity-card h3{
+        color: #8390A2;
+        margin: 1rem;
+   }
+   .activity-card table{
+        width: 100%;
+        border-collapse: border ;
+   }
+   .activity-card thead{
+        background: #efefef;
+        text-align: left;
+   }
+  th, td {
+        font-size: .9rem;
+        padding: 1rem;
+        color: #1d221d;
+   }
+   td {
+        font-size: .8rem;
+   }
+   tbody tr:nth-child(even){
+        background: #f9fafc;
+   }
+   .badge{
+        padding: .5rem 1rem;
+        border-radius: 20px;
+        background: #DEF7EC;
+   }
+   .td-team{
+        display: flex;
+        align-items: center;
+   }
+   .img-1,.img-2,.img-3{
+        height: 38px;
+        width: 38px;
+        border-radius: 50%;
+        margin-left: -10px;
+        border: 3px solid #efefef;
+        background-size: cover;
+        background-repeat: no-repeat;
+   }
+   .img-1{
+        background-image: url("{% static '1.jpg'%}");
+   }
+   .img-2{
+        background-image: url("{% static '2.jpg'%}");
+   }
+   .img-3{
+        background-image: url("{% static '3.jpg'%}");
+   }
+   .summary-card,.bday-card{
+        margin-bottom: 1.5rem;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+   }
+   .summary-single{
+        padding: .5rem 1rem;
+        display: flex;
+        align-items: center;
+   }
+   .summary-single span{
+        font-size: 1.5rem;
+        color: #777;
+        padding-right: 1rem;
+   }
+   .summary-single h5{
+        color: #1D2231;
+        font-size: 1.1rem;
+        margin-bottom: 0rem !important;
+   }
+   .summary-single small{
+        font-weight: 700;
+        color: #8390A2;
+   }
+   .bday-card{
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+   }
+   .bday-img{
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        border: 3px solid #efefef;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url("{% static '2.jpg' %}");
+        margin-right: 1rem;
+   }
+   .text-center{
+        text-align: center;
+   }
+   .text-center button{
+        background: #214ccf;
+        color: #fff;
+        border: 1px solid #0e3cc5;
+        border-radius: 4px;
+        padding: .4rem 1rem;
+   }
+</style>
+</head>
+<body>
+    <input type="checkbox" id="sidebar-toggle">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="brand"><span><i class="fas fa-air-freshener"></i></span><span>LavenderBeauty Dashboard</span></h3>
+            <label for="sidebar-toggle"><i class="fas fa-tasks"></i></label>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="">
+                        <span><i class="fa-solid fa-house-user"></i></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span><i class="fa-solid fa-users-rectangle"></i></span>
+                        <span>Staff details</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span><i class="fa-solid fa-people-line"></i></span>
+                        <span>Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span><i class="fa-solid fa-clipboard-question"></i></span>
+                        <span>Leaves</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span><i class="fa-regular fa-folder-closed"></i></span>
+                        <span>Project</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span><i class="fa-solid fa-t"></i></span>
+                        <span>Timesheet</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span><i class="fa-solid fa-book-bookmark"></i></span>
+                        <span>Contacts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span><i class="fa-solid fa-money-bill-transfer"></i></span>
+                        <span>Accounts</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--Sidebar-->
+    <!--Header-->
+    <div class="main-content">
+        <header>
+            <div class="search-wrapper">
+                <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="search" placeholder="Search">
+            </div>
+            <div class="social-icons">
+                <span><i class="fa-solid fa-bell"></i></span>
+                <span><i class="fa-solid fa-envelope-circle-check"></i></span>
+                <div></div>
+            </div>
+        </header>
+        <main>
+            <h2 class="dash-title">Overview</h2>
+            <div class="dash-cards">
+                <div class="card-single">
+                    <div class="card-body">
+                        <span><i class="fa-solid fa-indian-rupee-sign"></i></span>
+                        <div>
+                            <h5>Account Balance</h5>
+                            <h4>$65,780</h4>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="">View all</a>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div class="card-body">
+                        <span><i class="fa-solid fa-money-bills"></i></span>
+                        <div>
+                            <h5>Pending</h5>
+                            <h4>$65,780</h4>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="">View all</a>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div class="card-body">
+                        <span><i class="fa-solid fa-sack-xmark"></i></span>
+                        <div>
+                            <h5>Processed</h5>
+                            <h4>$65,780</h4>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="">View all</a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recent">
+                <div class="activity-card">
+                    <h3>Recent Activity</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Team</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>App Development</td>
+                                <td>Aug 13,2023</td>
+                                <td>Aug 14,2023</td>
+                                <td class="td-team">
+                                    <div class="img-1"></div>
+                                    <div class="img-2"></div>
+                                    <div class="img-3"></div>
+                                </td>
+                                <td><span class="badge">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>Front End Development</td>
+                                <td>Sept 10,2023</td>
+                                <td>Sept 11,2023</td>
+                                <td class="td-team"><div class="img-1"></div>
+                                    <div class="img-2"></div>
+                                    <div class="img-3"></div>
+                                </td>
+                                <td><span class="badge">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>Backend Development</td>
+                                <td>July 11,2023</td>
+                                <td>July 12,2023</td>
+                                <td class="td-team">
+                                    <div class="img-1"></div>
+                                    <div class="img-2"></div>
+                                    <div class="img-3"></div>
+                                </td>
+                                <td><span class="badge">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>PHP Developer</td>
+                                <td>June 11,2023</td>
+                                <td>June 12,2023</td>
+                                <td class="td-team">
+                                    <div class="img-1"></div>
+                                    <div class="img-2"></div>
+                                    <div class="img-3"></div> 
+                                </td>
+                                <td><span class="badge">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>Python Development</td>
+                                <td>May 1,2023</td>
+                                <td>May 2,2023</td>
+                                <td class="td-team">
+                                    <div class="img-1"></div>
+                                    <div class="img-2"></div>
+                                    <div class="img-3"></div>
+                                </td>
+                                <td><span class="badge">Success</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="summary">
+                    <div class="summary-card">
+                        <div class="summary-single">
+                            <span><i class="fa-solid fa-users-rectangle"></i></span>
+                            <div>
+                                <h5>196</h5>
+                                <small>Number of staffs</small>
+                            </div>
+                        </div>
+                        <div class="summary-single">
+                            <span><i class="fa-regular fa-face-smile"></i></span>
+                            <div>
+                                <h5>21</h5>
+                                <small>Number of leave</small>
+                            </div>
+                        </div>
+                        <div class="summary-single">
+                            <span><i class="far fa-id-badge"></i></span>
+                            <div>
+                                <h5>16</h5>
+                                <small>Profile update request</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bday-card">
+                        <div class="bday-img"></div>
+                        <div class="bday-info">
+                            <h5>Swathy S.Nair</h5>
+                            <small>Birthday Today</small>
+                            <div class="text-center">
+                                <button>
+                                    <span><i class="fas fa-birthday-cake"></i></span>
+                                        Wish her
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> 
+        </main>
+    </div>
+</body>
+</html>
