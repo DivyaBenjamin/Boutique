@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label>Styles</label>
+        </div>
+        <div>
+            <select name="Styles">
+                <option value="">...Select...</option>
+                {% for i in sty %}
+                <option value="{{i.id}}">{{i.styles}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Types of Styles</label>
+        </div>
+        <div>
+            <input type="text" name="typesofstyles">
+        </div>
+        <div>
+            <input type="submit" name="submit" value="Save">
+            <input type="cancel" name="cancel" value="Cancel">
+        </div>
+    </form>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Styles</th>
+            <th>Types of Styles</th>
+            <th>Action1</th>
+        </tr>
+        {% for l in typesof %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{l.styles.styles}}</td>
+            <td>{{l.typesof}}</td>
+            <td><a href="{%url 'adminboutique:deletetypesof' l.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

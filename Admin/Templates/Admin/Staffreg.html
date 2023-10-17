@@ -155,7 +155,8 @@ body{
 <body>
     <div class="container">
         <h1 class="form-title">StaffRegistration</h1>
-        <form action="#">
+        <form action="#" method="post">
+            {% csrf_token %}
           <div class="main-user-info">
             <div class="user-input-box">
               <label for="fullName">Full Name</label>
