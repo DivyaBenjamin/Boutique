@@ -1,0 +1,177 @@
+{% extends 'Shop/Header.html' %}
+{% load static %}
+{% block content%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Inter&family=Montserrat:wght@500&family=Playfair:opsz,wght@5..1200,300&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <title>Hair Styles</title>
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+body{
+    background: url("{% static 'pricing3.jpg' %}");
+    padding: 0 10px;
+}
+.wrapper{
+    max-width: 500px;
+    width: 100%;
+    background: #fff;
+    margin: 30px auto;
+    padding: 30px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.125);
+}
+.wrapper .title{
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #fe01fe;
+    text-transform: uppercase;
+    text-align: center;
+}
+.wrapper .form{
+    width: 100%;
+}
+.wrapper .form .input_field{
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.wrapper .form .input_field label{
+    width: 200px;
+    color: #757575;
+    margin-right: 10px;
+    font-size: 14px;
+}
+.wrapper .form .input_field .input{
+    width: 100%;
+    outline: none;
+    border: 1px solid #d5dbd9;
+    font-size: 15px;
+    padding: 8px 10px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+.wrapper .form .input_field .custom_select{
+    position: relative;
+    width: 100%;
+    height: 37px;
+}
+.wrapper .form .input_field .custom_select select{
+    appearance: none;
+    border: 1px solid #d5dbd9;
+    width: 100%;
+    height: 100%;
+    padding: 8px 10px;
+    border-radius: 3px;
+    outline: none;
+}
+.wrapper .form .input_field .custom_select:before{
+    content:"";
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    border: 8px solid;
+    border-color: rgb(255, 0, 191) transparent transparent transparent;
+    pointer-events: none;
+}
+.wrapper .form .input_field .input:focus,
+.wrapper .form .input_field select:focus{
+    border: 1px solid #fe01fe;
+}
+.wrapper .form .input_field .btn{
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 15px;
+    border: 0;
+    background: #fe01fe;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+}
+.wrapper .form .input_field:last-child{
+    margin-bottom: 0;
+}
+.wrapper .form .input_field .btn:hover{
+    background: #f195ed;
+}
+</style>
+<body>
+        <div class="wrapper">
+            <div class="title">Adding Hair Styles</div>
+            <div class="form">
+                <form action="" method="POST" id="hairstyleform" data-hairstyle-url="{% url 'shopboutique:Ajaxstyles' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        <div class="input_field"><label>Hair Style name:</label>
+                        <input type="text" name="name"></div>
+                        <div class="input_field"><label>Rate:</label>
+                        <input type="text" name="rate"></div>
+                        <div class="input_field"><label>Image:</label>
+                        <input type="file" name="image"></div>
+                        <div class="input_field"><label>Styles:</label>
+                            <div class="custom_select">
+                        <select name="Styles" id="styles">
+                            <option value="">..Select..</option>
+                            {% for i in sty %}
+                            <option value={{i.id}}>{{i.styles}}</option>
+                            {% endfor %}
+                        </select></div></div>
+                    <div class="input_field"><label>Types of styles:</label>
+                        <div class="custom_select">
+                    <select name="typesof" id="typesof">
+                        <option value="">..Select..</option>
+                    
+                    </select></div></div>
+                    <div class="Inputfield">
+                        <input type="submit" name="submit" value="Submit" class="btn">
+                    </div>
+                        </form>
+                    </div>
+        </div>
+        
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Rate</th>
+            <th>Image</th>
+            <th>HairStyles</th>
+            <th>Types of styles</th>
+            <th>Action</th>
+        </tr>
+        {% for k in addingstyle %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{k.name}}</td>
+            <td>{{k.rate}}</td>
+            <td><img src="{{k.image.url}}" width="100" height="100" alt=""></td>
+            <td>{{k.typesof.typesof}}</td>
+             <td><a href="{%url 'webshop:deleteproduct' k.id%}">Delete</a></td> 
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#styles").change(function () {
+        var pid = $(this).val();
+        var pr = $("#hairstyleform").attr("data-hairstyle-url");
+        $.ajax({
+            url: pr,
+            data: { pisd: pid, },
+            success: function (data) {
+                $("#typesof").html(data);
+            },
+        });
+    });
+
+</script>
+{% endblock content%}

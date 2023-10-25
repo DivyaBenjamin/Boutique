@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautyparlour-Admin</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label>Haircut</label>
+        </div>
+        <div>
+            <select name="haircuts">
+                <option value="">...Select...</option>
+                {% for i in haircuts %}
+                <option value="{{i.id}}">{{i.haircuts}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Types of Haircuts</label>
+        </div>
+        <div>
+            <input type="text" name="typesofhair">
+        </div>
+        <div>
+            <input type="submit" name="submit" value="Save">
+            <input type="cancel" name="cancel" value="Cancel">
+        </div>
+    </form>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Haircut</th>
+            <th>Types of Haircut</th>
+            <th>Action1</th>
+        </tr>
+        {% for l in typeshair %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{l.haircuts.haircuts}}</td>
+            <td>{{l.typesofhair}}</td>
+            <td><a href="{%url 'adminboutique:deletetypeshair' l.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

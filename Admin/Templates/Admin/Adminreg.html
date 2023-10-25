@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beautyparlour-Admin</title>
     <style>
-        *{
+         *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -17,12 +17,11 @@
 
 body{
     display: flex;
-    height: 130vh;
+    height: 120vh;
     align-items: center;
     background: url("{% static 'pricing3.jpg' %}");
     background-size: cover;
 }
-
 .container{
     width: 100%;
     max-width: 650px;
@@ -149,12 +148,12 @@ body{
     .main-user-info::-webkit-scrollbar{
         width: 0;
     }
-}
+} 
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="form-title">StaffRegistration</h1>
+        <h1 class="form-title">AdminRegistration</h1>
         <form action="#" method="post">
             {% csrf_token %}
           <div class="main-user-info">
@@ -186,13 +185,6 @@ body{
                       name="phoneNumber"
                       placeholder="Enter Phone Number" value="{{data.phone}}"/>
             </div>
-            <div class="user-input-box">
-                <label for="phoneNumber">Date of joining</label>
-                <input type="date"
-                        id="doj"
-                        name="dateofjoining"
-                        placeholder="Enter Joining date" value="{{data.doj}}"/>
-              </div>
             <div class="user-input-box">
               <label for="password">Password</label>
               <input type="password"
@@ -226,4 +218,6 @@ body{
     </div>
 </body>
 </html>
+
 {% endblock content %}
+    
