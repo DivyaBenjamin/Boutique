@@ -80,3 +80,15 @@ def adminreg(request):
         return redirect('adminboutique:adminreg')
     else:
         return render(request,'Admin/Adminreg.html',{'data':data})
+
+def haircoloring(request):
+    haircoloringdata=tbl_haircoloring.objects.all()
+    if request.method=="POST":
+        tbl_haircoloring.objects.create(haircoloring=request.POST.get('haircoloring'))
+        return redirect('adminboutique:haircoloring')
+    else:
+        return render(request,'Admin/Haircoloring.html',{'haircoloring':haircoloringdata})
+
+def deletecoloring(request,eid):
+     tbl_haircoloring.objects.get(id=eid).delete()
+     return redirect('adminboutique:haircoloring')

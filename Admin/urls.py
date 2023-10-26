@@ -14,4 +14,6 @@ urlpatterns = [
     path('typesofhaircut/',views.typesofhaircut,name="typesofhaircut"),
     path('deletetypeshair/<int:did>',views.deletetypeshair,name="deletetypeshair"),
     path('Adminreg/',views.adminreg,name="adminreg"),
+    path('Haircoloring/',views.haircoloring,name="haircoloring"),
+    path('deletecoloring/<int:eid>',views.deletecoloring,name="deletecoloring"),
 ]

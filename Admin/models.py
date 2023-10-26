@@ -48,3 +48,11 @@ class tbl_admin(models.Model):
     phone=models.CharField(max_length=25)
     password=models.CharField(max_length=20)
     gender=models.CharField(max_length=15)
+
+class tbl_haircoloring(models.Model):
+    haircoloring=models.CharField(max_length=35)
+
+class tbl_typesofcoloring(models.Model):
+    typesofhair=models.CharField(max_length=40)
+    haircoloring=models.ForeignKey(tbl_haircoloring,on_delete=models.CASCADE)
+    
