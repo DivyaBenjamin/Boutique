@@ -16,4 +16,6 @@ urlpatterns = [
     path('Adminreg/',views.adminreg,name="adminreg"),
     path('Haircoloring/',views.haircoloring,name="haircoloring"),
     path('deletecoloring/<int:eid>',views.deletecoloring,name="deletecoloring"),
+    path('typesofcoloring/',views.typesofcoloring,name="typesofcoloring"),
+    path('deletetypesofcoloring/<int:fid>',views.deletetypesofcoloring,name="deletetypesofcoloring"),
 ]

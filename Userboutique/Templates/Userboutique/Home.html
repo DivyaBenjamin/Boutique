@@ -89,6 +89,87 @@ section{
 	cursor:pointer;
 	color: #000;
 }
+.navbar .user{
+	width: 40px;
+	border-radius: 50%;
+	cursor: pointer;
+	margin-left: 30px;
+}
+.sub-menu-wrap{
+	position: absolute;
+	top:100%;
+	right: 10%;
+	width: 320px;
+	max-height: 0px;
+	overflow: hidden;
+	transition: max-height 0.5s;
+}
+ .open-menu{
+	max-height: 400px !important;
+}
+.sub-menu{
+	background: #fff;
+	padding: 20px;
+	margin: 10px;
+}
+.user-info{
+	display: flex;
+	align-items: center;
+}
+.user-info h3{
+	font-weight: 500;
+}
+.user-info img{
+	width: 60px;
+	border-radius: 40%;
+	margin-right: 15px;
+}
+.user-info-1{
+	display: flex;
+	align-items: center;
+}
+.user-info-1 h5{
+	font-weight: 300;
+}
+.user-info-1 img{
+	width: 30px;
+	border-radius: 30%;
+	margin-right: 15px;
+}
+.user-info-1 span{
+	margin-left: 48px;
+}
+.sub-menu hr{
+	border: 0;
+	height: 1px;
+	width: 100%;
+	background: #ccc;
+	margin: 15px 0 10px;
+}
+.sub-menu-link{
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: #8a6d46;
+	margin: 12px 0;
+}
+.sub-menu-link h4{
+	width: 100%;
+}
+.sub-menu-link img{
+	width: 20px;
+	background: #f3efec;
+	border-radius: 50%;
+	padding: 8px;
+	margin-right: 15px;
+}
+.sub-menu-link span{
+	font-size: 22px;
+	transition: transform 0.5s;
+}
+.sub-menu-link:hover span{
+	transform: translate(5px);
+}
 /*header end*/
 /* home start */
 .home{
@@ -548,12 +629,37 @@ section{
             <a href="{% url 'Userboutique:Userboutique' %}">Home</a>
             <a href="#">Services</a>
             <a href="{% url 'Userboutique:styles' %}">Styles</a>
-            <a href="#">Pricing</a>
             <a href="#">Blogs</a>
             <a href="#">Review</a>
-            <a href="#">About</a>
-			<a href="#">Logout</a>
-
+            <a href="{% url 'Userboutique:about' %}">About</a>
+				<img src="{% static 'img.png' %}" class="user" onclick="toggleMenu()">
+				<div class="sub-menu-wrap" id="subMenu">
+					<div class="sub-menu">
+						<div class="user-info">
+							<img src="{% static 'img.png' %}">
+							<h2>Angel Susy</h2>
+						</div>
+						<hr>
+						<div class="user-info-1">
+						<a href="#" class="sub-menu-link"></a>
+						<img src="{% static 'img2.png' %}">
+						<h4>My Profile</h4>
+						<span>></span>	
+						</div>
+						<div class="user-info-1">
+						<a href="#" class="sub-menu-link"></a>
+						<img src="{% static 'img3.jpg' %}">
+						<h4>Change password</h4>
+						<span>></span>
+						</div>
+						<div class="user-info-1">
+						<a href="{% url 'webguest:login' %}" class="sub-menu-link"></a>
+						<img src="{% static 'img4.png' %}">
+						<h4>Logout</h4>
+						<span>></span>
+						</div>
+					</div>
+				</div>
         </nav>
          <div  id="menu-btn" class="fas fa-bars"></div>
     </section>
@@ -831,6 +937,14 @@ section{
 </section>
 </body>
 </html>
+<script>
+	let subMenu = document.getElementById("subMenu");
+
+	function toggleMenu(){
+		console.log('hi');
+		subMenu.classList.toggle("open-menu");
+	}
+</script>
 <script>
 	let navbar = document.querySelector('.header .navbar');
 	let menuBtn = document.querySelector('#menu-btn');

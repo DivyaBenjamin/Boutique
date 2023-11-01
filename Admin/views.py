@@ -92,3 +92,17 @@ def haircoloring(request):
 def deletecoloring(request,eid):
      tbl_haircoloring.objects.get(id=eid).delete()
      return redirect('adminboutique:haircoloring')
+
+def typesofcoloring(request):
+    coloringdata=tbl_haircoloring.objects.all()
+    typesofcoloring=tbl_typesofcoloring.objects.all()
+    if request.method=="POST":
+        haircoloring=tbl_haircoloring.objects.get(id=request.POST.get('haircoloring'))
+        tbl_typesofcoloring.objects.create(typesofhair=request.POST.get('typesofcoloring'),haircoloring=haircoloring)
+        return redirect('adminboutique:typesofcoloring')
+    else:
+        return render(request,'Admin/Typesofcoloring.html',{'haircoloring':coloringdata,'typesofcoloring':typesofcoloring})
+
+def deletetypesofcoloring(request,fid):
+    tbl_typesofcoloring.objects.get(id=fid).delete()
+    return redirect('adminboutique:typesofcoloring')

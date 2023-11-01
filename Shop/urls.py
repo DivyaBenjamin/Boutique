@@ -7,5 +7,9 @@ urlpatterns = [
     path('Ajaxstyles/',views.Ajaxstyles,name="Ajaxstyles"),
     path('Staffreg/',views.staffreg,name="staffreg"),
     path('Addinghair/',views.addinghair,name="addinghair"),
+    path('deletehair/<int:aid>',views.deletehair,name="deletehair"),
     path('Ajaxcut/',views.Ajaxcut,name="Ajaxcut"),
+    path('Addingcolor/',views.addingcolor,name="addingcolor"),
+    path('deletehaircolor/<int:bid>',views.deletehaircolor,name="deletehaircolor"),
+    path('Ajaxcolor/',views.Ajaxcolor,name="Ajaxcolor"),
 ]

@@ -7,3 +7,6 @@ def Userboutique(request):
 
 def styles(request):
     return render(request,'Userboutique/Styles.html')
+
+def about(request):
+    return render(request,'Userboutique/About.html')

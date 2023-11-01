@@ -154,7 +154,7 @@ body{
             <td><img src="{{k.image.url}}" width="150" height="150" alt=""></td>
             <td>{{k.haircuts.haircuts}}</td>
             <td>{{k.typesofhair}}</td>
-             <td><a href="{%url 'webshop:deleteproduct' k.id%}">Delete</a></td> 
+            <td><a href="{%url 'shopboutique:deletehair' k.id%}">Delete</a></td> 
         </tr>
         {% endfor %}
     </table>
@@ -164,7 +164,7 @@ body{
 <script>
     $("#haircuts").change(function () {
         var cid = $(this).val();
-        var cr = $("#haircutform").attr("data-hairstyle-url");
+        var cr = $("#haircutform").attr("data-haircut-url");
         $.ajax({
             url: cr,
             data: { cisd: cid, },

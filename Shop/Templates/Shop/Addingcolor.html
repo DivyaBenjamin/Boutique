@@ -105,27 +105,27 @@ body{
 </style>
 <body>
         <div class="wrapper">
-            <div class="title">Adding Hair Styles</div>
+            <div class="title">Adding Haircoloring</div>
             <div class="form">
-                <form action="" method="POST" id="hairstyleform" data-hairstyle-url="{% url 'shopboutique:Ajaxstyles' %}" enctype="multipart/form-data">
+                <form action="" method="POST" id="haircoloringform" data-haircoloring-url="{% url 'shopboutique:Ajaxcolor' %}" enctype="multipart/form-data">
                     {% csrf_token %}
-                        <div class="input_field"><label>Hair Style name:</label>
+                        <div class="input_field"><label>Haircolor name:</label>
                         <input type="text" name="name"></div>
                         <div class="input_field"><label>Rate:</label>
                         <input type="text" name="rate"></div>
                         <div class="input_field"><label>Image:</label>
                         <input type="file" name="image"></div>
-                        <div class="input_field"><label>Styles:</label>
+                        <div class="input_field"><label>Haircoloring:</label>
                             <div class="custom_select">
-                        <select name="Styles" id="styles">
+                        <select name="haircoloring" id="haircoloring">
                             <option value="">..Select..</option>
-                            {% for i in sty %}
-                            <option value={{i.id}}>{{i.styles}}</option>
+                            {% for i in haircoloring %}
+                            <option value={{i.id}}>{{i.haircoloring}}</option>
                             {% endfor %}
                         </select></div></div>
-                    <div class="input_field"><label>Types of styles:</label>
+                    <div class="input_field"><label>Types of Haircoloring:</label>
                         <div class="custom_select">
-                    <select name="typesof" id="typesof">
+                    <select name="typesofcoloring" id="typesofcoloring">
                         <option value="">..Select..</option>
                     
                     </select></div></div>
@@ -142,18 +142,19 @@ body{
             <th>Name</th>
             <th>Rate</th>
             <th>Image</th>
-            <th>HairStyles</th>
-            <th>Types of styles</th>
+            <th>Haircoloring</th>
+            <th>Types of haircoloring</th>
             <th>Action</th>
         </tr>
-        {% for k in addingstyle %}
+        {% for k in addingcoloring %}
         <tr>
             <td>{{forloop.counter}}</td>
             <td>{{k.name}}</td>
             <td>{{k.rate}}</td>
-            <td><img src="{{k.image.url}}" width="100" height="100" alt=""></td>
-            <td>{{k.typesof.typesof}}</td>
-             <!-- <td><a href="{%url 'shopboutique:deleteproduct' k.id%}">Delete</a></td>  -->
+            <td><img src="{{k.image.url}}" width="150" height="150" alt=""></td>
+            <td>{{k.haircoloring.haircoloring}}</td>
+            <td>{{k.typesofhair}}</td>
+             <td><a href="{%url 'shopboutique:deletehaircolor' k.id%}">Delete</a></td> 
         </tr>
         {% endfor %}
     </table>
@@ -161,14 +162,14 @@ body{
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    $("#styles").change(function () {
-        var pid = $(this).val();
-        var pr = $("#hairstyleform").attr("data-hairstyle-url");
+    $("#haircoloring").change(function () {
+        var hid = $(this).val();
+        var hr = $("#haircoloringform").attr("data-haircoloring-url");
         $.ajax({
-            url: pr,
-            data: { pisd: pid, },
+            url: hr,
+            data: { hisd: hid, },
             success: function (data) {
-                $("#typesof").html(data);
+                $("#typesofhair").html(data);
             },
         });
     });

@@ -12,10 +12,10 @@
             <label>Haircoloring</label>
         </div>
         <div>
-            <select name="haircuts">
+            <select name="haircoloring">
                 <option value="">...Select...</option>
-                {% for i in haircuts %}
-                <option value="{{i.id}}">{{i.haircuts}}</option>
+                {% for i in haircoloring %}
+                <option value="{{i.id}}">{{i.haircoloring}}</option>
                 {% endfor %}
             </select>
         </div>
@@ -23,7 +23,7 @@
             <label>Types of Haircoloring</label>
         </div>
         <div>
-            <input type="text" name="typesofhair">
+            <input type="text" name="typesofcoloring">
         </div>
         <div>
             <input type="submit" name="submit" value="Save">
@@ -37,12 +37,12 @@
             <th>Types of Haircoloring</th>
             <th>Action1</th>
         </tr>
-        {% for l in typeshair %}
+        {% for l in typesofcoloring %}
         <tr>
             <td>{{forloop.counter}}</td>
-            <td>{{l.haircuts.haircuts}}</td>
+            <td>{{l.haircoloring.haircoloring}}</td>
             <td>{{l.typesofhair}}</td>
-            <td><a href="{%url 'adminboutique:deletetypeshair' l.id %}">Delete</a></td>
+            <td><a href="{%url 'adminboutique:deletetypesofcoloring' l.id %}">Delete</a></td>
         </tr>
         {% endfor %}
     </table>
