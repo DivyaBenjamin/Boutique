@@ -10,3 +10,6 @@ def styles(request):
 
 def about(request):
     return render(request,'Userboutique/About.html')
+
+def searchservices(request):
+    return render(request,'Userboutique/Service.html')

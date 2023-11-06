@@ -126,15 +126,21 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'adminboutique:userreg'%}">
-                        <span><i class="fa-solid fa-users-rectangle"></i></span>
-                        <span>UserRegistration</span>
+                    <a href="{% url 'adminboutique:staffreg' %}">
+                        <span><i class="fa-solid fa-people-line"></i></span>
+                        <span>StaffRegistration</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'shopboutique:staffreg' %}">
-                        <span><i class="fa-solid fa-people-line"></i></span>
-                        <span>StaffRegistration</span>
+                    <a href="{% url 'adminboutique:servicestypes'%}">
+                        <span><i class="fa-solid fa-users-rectangle"></i></span>
+                        <span>Types of services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'adminboutique:addservices' %}">
+                        <span><i class="fa-regular fa-folder-closed"></i></span>
+                        <span>Add Services</span>
                     </a>
                 </li>
                 <li>
@@ -144,27 +150,27 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <span><i class="fa-regular fa-folder-closed"></i></span>
-                        <span>Project</span>
+                    <a href="{% url 'adminboutique:work' %}">
+                        <span><i class="fa-solid fa-t"></i></span>
+                        <span>Work Gallery</span>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <span><i class="fa-solid fa-t"></i></span>
-                        <span>Timesheet</span>
+                        <span><i class="fa-solid fa-phone"></i></span>
+                        <span>View Booking</span>
                     </a>
                 </li>
                 <li>
                     <a href="">
                         <span><i class="fa-solid fa-book-bookmark"></i></span>
-                        <span>Contacts</span>
+                        <span>Assign Staff</span>
                     </a>
                 </li>
                 <li>
                     <a href="">
                         <span><i class="fa-solid fa-money-bill-transfer"></i></span>
-                        <span>Accounts</span>
+                        <span>View Rating</span>
                     </a>
                 </li>
             </ul>

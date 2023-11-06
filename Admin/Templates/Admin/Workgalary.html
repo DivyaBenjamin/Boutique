@@ -153,69 +153,46 @@ body{
 </head>
 <body>
     <div class="container">
-        <h1 class="form-title">UserRegistration</h1>
-        <form action="#" method="post">
+        <h1 class="form-title">Work Gallery</h1>
+        <form action="#" method="post" enctype="multipart/form-data">
             {% csrf_token %}
           <div class="main-user-info">
             <div class="user-input-box">
-              <label for="fullName">Full Name</label>
+              <label for="rate">Caption</label>
               <input type="text"
-                      id="fullName"
-                      name="fullName"
-                      placeholder="Enter Full Name" value="{{data.name}}"/>
+                      id="caption"
+                      name="caption"
+                      placeholder="Enter rate" value="{{data.caption}}"/>
             </div>
             <div class="user-input-box">
-              <label for="username">Username</label>
-              <input type="text"
-                      id="username"
-                      name="username"
-                      placeholder="Enter Username" value="{{data.username}}"/>
-            </div>
-            <div class="user-input-box">
-              <label for="email">Email</label>
-              <input type="email"
-                      id="email"
-                      name="email"
-                      placeholder="Enter Email" value="{{data.email}}"/>
-            </div>
-            <div class="user-input-box">
-              <label for="phoneNumber">Phone Number</label>
-              <input type="text"
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      placeholder="Enter Phone Number" value="{{data.phone}}"/>
-            </div>
-            <div class="user-input-box">
-              <label for="password">Password</label>
-              <input type="password"
-                      id="password"
-                      name="password"
-                      placeholder="Enter Password" value="{{data.password}}"/>
-            </div>
-            <div class="user-input-box">
-              <label for="confirmPassword">Confirm Password</label>
-              <input type="password"
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      placeholder="Confirm Password"/>
-            </div>
-          </div>
-          <div class="gender-details-box">
-            <span class="gender-title">Gender</span>
-            <div class="gender-category">
-              <input type="radio" name="gender" id="male">
-              <label for="male">Male</label>
-              <input type="radio" name="gender" id="female">
-              <label for="female">Female</label>
-              <input type="radio" name="gender" id="other">
-              <label for="other">Other</label>
-            </div>
+                <label for="phoneNumber">Image</label>
+                <input type="file"
+                        id="image"
+                        name="image"
+                        placeholder="Upload Proof" value="{{data.image}}"/>
+              </div>
           </div>
           <div class="form-submit-btn">
             <input type="submit" value="Register">
           </div>
         </form>
     </div>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Caption</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+        {% for i in work %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.caption}}</td>
+            <td><img src="{{i.image.url}}" width="50" height="50"></td>
+            <td><a href="{% url 'adminboutique:deletework' i.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
 

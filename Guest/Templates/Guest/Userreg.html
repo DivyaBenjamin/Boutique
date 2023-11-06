@@ -1,6 +1,4 @@
-{% extends 'Shop/Header.html' %}
 {% load static %}
-{% block content%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beautyparlour-Admin</title>
     <style>
-        *{
+         *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -17,18 +15,17 @@
 
 body{
     display: flex;
-    height: 130vh;
+    height: 120vh;
     align-items: center;
     background: url("{% static 'pricing3.jpg' %}");
     background-size: cover;
 }
-
 .container{
     width: 100%;
     max-width: 650px;
     background: rgba(0, 0, 0, 0.5);
     padding: 28px;
-    margin: 0 28px;
+    margin: 0 280px;
     border-radius: 10px;
     box-shadow: inset -2px 2px 2px white;
 }
@@ -149,13 +146,13 @@ body{
     .main-user-info::-webkit-scrollbar{
         width: 0;
     }
-}
+} 
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="form-title">StaffRegistration</h1>
-        <form action="#" method="post">
+        <h1 class="form-title">UserRegistration</h1>
+        <form action="#" method="post" enctype="multipart/form-data">
             {% csrf_token %}
           <div class="main-user-info">
             <div class="user-input-box">
@@ -187,13 +184,6 @@ body{
                       placeholder="Enter Phone Number" value="{{data.phone}}"/>
             </div>
             <div class="user-input-box">
-                <label for="phoneNumber">Date of joining</label>
-                <input type="date"
-                        id="doj"
-                        name="dateofjoining"
-                        placeholder="Enter Joining date" value="{{data.doj}}"/>
-              </div>
-            <div class="user-input-box">
               <label for="password">Password</label>
               <input type="password"
                       id="password"
@@ -219,6 +209,13 @@ body{
               <label for="other">Other</label>
             </div>
           </div>
+          <div class="user-input-box">
+            <label for="password">Image</label>
+            <input type="file"
+                    id="image"
+                    name="image"
+                    placeholder="" value="{{data.image}}"/>
+          </div>
           <div class="form-submit-btn">
             <input type="submit" value="Register">
           </div>
@@ -226,4 +223,4 @@ body{
     </div>
 </body>
 </html>
-{% endblock content %}
+    
