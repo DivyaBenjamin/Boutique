@@ -1,0 +1,113 @@
+{% extends 'Userboutique/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Inter&family=Montserrat:wght@500&family=Playfair:opsz,wght@5..1200,300&family=Poppins:ital,wght@0,300;0,400;1,300&display=swap">
+    <title>User-Profile</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'poppins', sans-serif;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            background-image: url("{% static 'about5.png' %}");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-box{
+            background: #8a6d46;
+            text-align: center;
+            padding: 40px 90px;
+            color: #fff;
+            position: relative;
+            border-radius: 20px;
+        }
+        .menu{
+            width: 25px;
+            position: absolute;
+            left: 40px;
+            top: 40px;
+        }
+        .settings{
+            width: 25px;
+            position: absolute;
+            right: 40px;
+            top: 40px;
+        }
+        .profile-pic{
+            width: 100px;
+            border-radius: 50%;
+            background: #fff;
+            padding: 6px;
+        }
+        .profile-bottom{
+            background: #fff;
+            color: #999;
+            padding: 60px 0;
+            margin-right: -90px;
+            margin-left: -90px;
+            margin-bottom: -40px;
+            border-radius: 20px;
+            margin-top: -5px;
+        }
+        .profile-bottom img{
+            width: 15px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .profile-box button{
+            background: #fff;
+            color: #8a6d46;
+            border: none;
+            outline: none;
+            box-shadow: 0 5px 10px rgba(246, 171, 49, 0.5);
+            padding: 15px 60px;
+            cursor: pointer;
+            border-radius: 30px;
+            margin-bottom: -50px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .profile-box h3{
+            font-size: 22px;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-box">
+            <form action="" method="POST" enctype="multipart/form-data">
+            <img src="{% static 'menu.png' %}" class="menu">
+            <img src="{% static 'img13.png' %}" class="settings">
+            <img src="{{i.image.url}}" class="profile-pic">
+              <h3>{{i.name}}</h3>
+              <p>{{i.username}}</p>
+            </form>
+            <button type="button"><a href="{% url 'Userboutique:editprofile' %}">Edit Profile</a></button>
+            <div class="profile-bottom">
+                <p>Learn more about my profile</p>
+                <img src="{% static 'img14.png' %}" alt="">
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+
+
+{% endblock content %}

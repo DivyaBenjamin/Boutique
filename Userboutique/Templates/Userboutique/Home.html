@@ -138,6 +138,7 @@ section{
 }
 .user-info-1 span{
 	margin-left: 48px;
+	cursor: pointer;
 }
 .sub-menu hr{
 	border: 0;
@@ -627,8 +628,8 @@ section{
             <div id="close-navbar" class="fas fa-times"></div>
 
             <a href="{% url 'Userboutique:Userboutique' %}">Home</a>
-            <a href="{% url 'Userboutique:searchservices' %}">Services</a>
-            <a href="{% url 'Userboutique:styles' %}">Styles</a>
+            <a href="{% url 'Userboutique:styles' %}">Services</a>
+
             <a href="#">Blogs</a>
             <a href="#">Review</a>
             <a href="{% url 'Userboutique:about' %}">About</a>
@@ -636,26 +637,26 @@ section{
 				<div class="sub-menu-wrap" id="subMenu">
 					<div class="sub-menu">
 						<div class="user-info">
-							<img src="{% static 'img.png' %}">
-							<h2>Angel Susy</h2>
+							<img src="{{i.image.url}}">
+							<h2>{{i.name}}</h2>
 						</div>
 						<hr>
 						<div class="user-info-1">
-						<a href="#" class="sub-menu-link"></a>
 						<img src="{% static 'img2.png' %}">
-						<h4>My Profile</h4>
+						<a href="{% url 'Userboutique:profile' %}" class="sub-menu-link">
+						<h4>My Profile</h4></a>
 						<span>></span>	
 						</div>
 						<div class="user-info-1">
-						<a href="#" class="sub-menu-link"></a>
 						<img src="{% static 'img3.jpg' %}">
-						<h4>Change password</h4>
+						<a href="{% url 'Userboutique:changepassword' %}" class="sub-menu-link">
+						<h4>Change password</h4></a>
 						<span>></span>
 						</div>
 						<div class="user-info-1">
-						<a href="{% url 'webguest:login' %}" class="sub-menu-link"></a>
 						<img src="{% static 'img4.png' %}">
-						<h4>Logout</h4>
+						<a href="{% url 'Userboutique:logout' %}" class="sub-menu-link">
+						<h4>Logout</h4></a>
 						<span>></span>
 						</div>
 					</div>

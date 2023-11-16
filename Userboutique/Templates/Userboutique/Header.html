@@ -207,13 +207,10 @@ section{
             <div id="close-navbar" class="fas fa-times"></div>
 
             <a href="{% url 'Userboutique:Userboutique' %}">Home</a>
-            <a href="#">Services</a>
-            <a href="#">Styles</a>
-            <a href="#">Pricing</a>
+            <a href="{% url 'Userboutique:styles' %}">Services</a>
             <a href="#">Blogs</a>
             <a href="#">Review</a>
-            <a href="#">About</a>
-			<a href="#">Logout</a>
+            <a href="{% url 'Userboutique:about' %}">About</a>
 
         </nav>
          <div  id="menu-btn" class="fas fa-bars"></div>

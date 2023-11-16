@@ -1,15 +1,68 @@
 from django.shortcuts import render,redirect
 from Userboutique.models import *
+from Guest.models import *
+from django.contrib.auth import logout as logouts
 
 # Create your views here.
 def Userboutique(request):
-    return render(request,'Userboutique/home.html')
+    User=tbl_user.objects.get(id=request.session['uid'])
+    return render(request,'Userboutique/home.html',{'i':User})
 
 def styles(request):
-    return render(request,'Userboutique/Styles.html')
+    stypedata=tbl_typesofservices.objects.all()
+    userdata=tbl_user.objects.get(id=request.session["uid"])
+    servicesdata=tbl_addservices.objects.all()
+    return render(request,'Userboutique/Styles.html',{'servicestypes':stypedata,'services':servicesdata})
+
+
+
+def ajaxservice(request):
+    types=tbl_typesofservices.objects.get(id=request.GET.get("sid"))
+    services=tbl_addservices.objects.filter(servicestypes=types)
+    return render(request,"Userboutique/Ajaxservice.html",{'services':services})
+
+def bookingservice(request):
+    bookingservicedata=tbl_bookingservice.objects.all()
+    userdata=tbl_user.objects.get(id=request.session["uid"])
+    if request.method=="POST":
+        tbl_bookingservice.objects.create(booked_date=request.POST.get('Bookeddate'))
+        return redirect('Userboutique:bookingservice')
+    else:
+        return render(request,'Userboutique/Bookingservice.html',{'data':userdata,'err':1})
 
 def about(request):
     return render(request,'Userboutique/About.html')
 
-def searchservices(request):
-    return render(request,'Userboutique/Service.html')
+def profile(request):
+    User=tbl_user.objects.get(id=request.session['uid'])
+    return render(request,'Userboutique/Profile.html',{'i':User})
+
+def editprofile(request):
+    edituser=tbl_user.objects.get(id=request.session['uid'])
+    if request.method=="POST":
+        edituser.name=request.POST.get('name')
+        edituser.username=request.POST.get('username')
+        edituser.save()
+        return redirect('Userboutique:editprofile')
+    else:
+        return render(request,'Userboutique/Editprofile.html',{'i':edituser})
+
+def changepassword(request):
+    user=tbl_user.objects.get(id=request.session['uid'])
+    if request.method=="POST":
+        if (user.password)==(request.POST.get('currentpassword')):
+            if (request.POST.get('newpassword'))==(request.POST.get('confirmpassword')):
+                user.password=request.POST.get('confirmpassword')
+                user.save()
+                return render(request,'Userboutique/Changepassword.html',{'err':3})
+            else:
+                return render(request,'Userboutique/Changepassword.html',{'err':1})
+        else:
+            return render(request,'Userboutique/Changepassword.html',{'err':2})
+    else:
+        return render(request,'Userboutique/Changepassword.html',{'i':user})
+
+def logout(request):
+    if request.method=="POST":
+        logouts(request)
+        return redirect('Userboutique:Userboutique')

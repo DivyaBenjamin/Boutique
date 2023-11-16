@@ -58,3 +58,6 @@ def adminreg(request):
         return redirect('adminboutique:adminreg')
     else:
         return render(request,'Admin/Adminreg.html',{'data':data})
+
+def assignstaff(request):
+    return render(request,'Admin/Assignstaff.html')

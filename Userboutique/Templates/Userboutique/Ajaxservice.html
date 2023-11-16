@@ -1,0 +1,15 @@
+<div class="Sub-container">
+    <div class="Container">
+        <div class="Card-wrapper" id="viewbooking">
+            {% for l in services %}
+            <div class="Card">
+                <div><img src="{{l.image.url}}" width="150" height="150"></div>
+                <div>Name:{{l.servicesdetail}}</div>
+                <div>Rate:{{l.rate}}</div>
+                <div>Type:{{l.servicestypes.servicestypes}}</div>
+                <div><a href="{% url 'Userboutique:bookingservice' %}">Book Now</a></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
