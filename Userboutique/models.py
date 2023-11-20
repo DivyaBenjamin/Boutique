@@ -8,3 +8,14 @@ class tbl_bookingservice(models.Model):
     booked_date=models.DateField(null=True)
     user=models.ForeignKey(tbl_user,on_delete=models.CASCADE)
     services=models.ForeignKey(tbl_addservices,on_delete=models.CASCADE,null=True)
+
+class tbl_blogs(models.Model):
+    subject=models.CharField(max_length=20)
+    message=models.CharField(max_length=40)
+    blog_date=models.DateField(auto_now_add=True,null=True)
+
+class tbl_feedback(models.Model):
+    message=models.CharField(max_length=40)
+    message_date=models.DateField(auto_now_add=True)
+    user=models.ForeignKey(tbl_user,on_delete=models.SET_NULL,null=True)
+    staff=models.ForeignKey(tbl_staffreg,on_delete=models.SET_NULL,null=True)

@@ -1,6 +1,7 @@
 from django.shortcuts import redirect,render
 from Admin.models import *
 from Shop.models import *
+from Userboutique.models import *
 # Create your views here.
 def adminboutique(request):
     return render(request,'Admin/home.html')
@@ -61,3 +62,8 @@ def adminreg(request):
 
 def assignstaff(request):
     return render(request,'Admin/Assignstaff.html')
+
+def viewfeedback(request):
+    user=tbl_user.objects.all()
+    userdata=tbl_feedback.objects.filter(user_id__in=user)
+    return render(request,'Admin/Viewfeedback.html',{'feedback':userdata})

@@ -160,7 +160,7 @@
                 <div>Name:{{l.servicesdetail}}</div>
                 <div>Rate:{{l.rate}}</div>
                 <div>Type:{{l.servicestypes.servicestypes}}</div>
-                <div><a href="{% url 'Userboutique:bookingservice' %}">Book Now</a></div>
+                <div><a href="{% url 'Userboutique:bookingservice' l.id %}">Book Now</a></div>
             </div>
             
             {% if forloop.counter|divisibleby:4 %}
