@@ -60,10 +60,19 @@ def adminreg(request):
     else:
         return render(request,'Admin/Adminreg.html',{'data':data})
 
-def assignstaff(request):
-    return render(request,'Admin/Assignstaff.html')
+def assignstaff(request,did):
+    staffdata=tbl_staffreg.objects.get(id=request.session["sid"])
+    bookingdata=tbl_assignstaff.objects.filter(booking__staff=staffdata)
+    booking_item=tbl_assignstaff.objects.get(id=did)
+    booking_item.assign_status=1
+    booking_item.save()
+    return render(request,'Admin/Viewbooking.html',{'bookingservice':bookingdata,'err':2})
 
 def viewfeedback(request):
     user=tbl_user.objects.all()
     userdata=tbl_feedback.objects.filter(user_id__in=user)
     return render(request,'Admin/Viewfeedback.html',{'feedback':userdata})
+
+def viewbooking(request):
+    bookingdata=tbl_bookingservice.objects.all()
+    return render(request,'Admin/Viewbooking.html',{'bookingservice':bookingdata})

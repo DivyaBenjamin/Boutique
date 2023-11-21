@@ -19,3 +19,10 @@ class tbl_feedback(models.Model):
     message_date=models.DateField(auto_now_add=True)
     user=models.ForeignKey(tbl_user,on_delete=models.SET_NULL,null=True)
     staff=models.ForeignKey(tbl_staffreg,on_delete=models.SET_NULL,null=True)
+
+class tbl_contactus(models.Model):
+    name=models.CharField(max_length=40)
+    phone=models.CharField(max_length=35)
+    email=models.CharField(max_length=33)
+    message=models.CharField(max_length=30)
+    date=models.DateField(auto_now_add=True,null=True)

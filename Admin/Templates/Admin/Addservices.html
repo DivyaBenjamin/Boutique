@@ -120,6 +120,28 @@ body{
     color: rgb(255, 255, 255);
 }
 
+.content-table{
+    border-collapse: collapse;
+    margin:35px 0;
+    font-size: 1.2rem;
+    margin-left: 700px;
+    min-width: 400px;
+    margin-top: -400px;
+}
+
+.content-table tr th{
+    background-color: #e319ee;
+}
+
+.content-table tr{
+    background-color: #fff;
+    text-align: left;
+    font-weight: italic;
+}
+.content-table th, .content-table td{
+    padding: 12px 15px;
+}
+
 @media(max-width: 600px){
     .container{
         min-width: 280px;
@@ -193,7 +215,7 @@ body{
           </div>
         </form>
     </div>
-    <table>
+    <table class="content-table">
         <tr>
             <th>#</th>
             <th>Types of Services</th>

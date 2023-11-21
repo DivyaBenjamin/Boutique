@@ -166,6 +166,49 @@
         border-radius: 4px;
         padding: .4rem 1rem;
    }
+   .user{
+        width: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        margin-left: 30px;
+   }
+   .sub-menu-wrap{
+        position: absolute;
+        top: 100%;
+        right: 10%;
+        width: 320px;
+   }
+   .sub-menu{
+        background: #fff;
+        padding: 20px;
+        margin: 10px;
+   }
+   .user-info{
+        display: flex;
+        align-items: center;
+   }
+   .user-info h2{
+        font-weight: 150;
+   }
+   .user-info img{
+        width: 60px;
+        border-radius: 50%;
+        margin-right: 15px;
+   }
+   .sub-menu hr{
+        border: 0;
+        height: 1px;
+        width:100%;
+        background: #ccc;
+        margin: 15px 0 10px;
+   }
+   .sub-menu link{
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #525252;
+        margin: 12px 0;
+   }
 </style>
 </head>
 <body>
@@ -239,7 +282,31 @@
             <div class="social-icons">
                 <span><i class="fa-solid fa-bell"></i></span>
                 <span><i class="fa-solid fa-envelope-circle-check"></i></span>
-                <div></div>
+                <div><img src="{% static 'img.png' %}" class="user" onclick="toggleMenu()"></div>
+                <div class="sub-menu-wrap" id="subMenu">
+                    <div class="sub-menu">
+                        <div class="user-info">
+                            <img src="{% static 'img.png' %}">
+                            <h2>Admin</h2>
+                            <hr>
+                        <a href="" class="sub-menu-link">
+                            <img src="{% static 'img2.png' %}">
+                            <p>Edit Profile</p>
+                            <span>></span>
+                        </a>
+                        <a href="" class="sub-menu-link">
+                            <img src="{% static 'img3.jpg' %}">
+                            <p>Change password</p>
+                            <span>></span>
+                        </a>
+                        <a href="" class="sub-menu-link">
+                            <img src="{% static 'img4.png' %}">
+                            <p>Log Out</p>
+                            <span>></span>
+                        </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
     <!--Header-->    
@@ -399,3 +466,9 @@
     </div>
 </body>
 </html>
+<script>
+    let subMenu = document.getElementById("subMenu");
+    function toggleMenu(){
+        subMenu.classList.toggle("open-menu");
+    }
+</script>

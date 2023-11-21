@@ -11,6 +11,7 @@ urlpatterns = [
     path('deletework/<int:aid>',views.deletework,name="deletework"),
     path('Staffreg/',views.staffreg,name="staffreg"),
     path('Adminreg/',views.adminreg,name="adminreg"),
-    path('Assignstaff/',views.assignstaff,name="assignstaff"),
+    path('Assignstaff/<int:did>',views.assignstaff,name="assignstaff"),
     path('Viewfeedback/',views.viewfeedback,name="viewfeedback"),
+    path('Viewbooking/',views.viewbooking,name="viewbooking"),
 ]
