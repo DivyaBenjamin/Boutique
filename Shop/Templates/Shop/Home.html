@@ -227,25 +227,25 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{% url 'shopboutique:viewassigned' %}">
                         <span><i class="fa-solid fa-users-rectangle"></i></span>
-                        <span>View Assigned service</span>
+                        <span>View Assigned work</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'shopboutique:addingstyles' %}">
+                    <a href="{% url 'shopboutique:viewfeedback' %}">
                         <span><i class="fa-solid fa-people-line"></i></span>
-                        <span>View rating</span>
+                        <span>View Feedback</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{% url 'shopboutique:addinghair' %}">
+                <!-- <li>
+                    <a href="">
                         <span><i class="fa-solid fa-clipboard-question"></i></span>
                         <span>*</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'shopboutique:addingcolor' %}">
+                    <a href="">
                         <span><i class="fa-regular fa-folder-closed"></i></span>
                         <span>*</span>
                     </a>
@@ -267,7 +267,7 @@
                         <span><i class="fa-solid fa-money-bill-transfer"></i></span>
                         <span>Accounts</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
@@ -289,17 +289,17 @@
                             <img src="{% static 'img.png' %}">
                             <h2>Admin</h2>
                             <hr>
-                        <a href="" class="sub-menu-link">
+                        <a href="{% url 'shopboutique:profile'%}" class="sub-menu-link">
                             <img src="{% static 'img2.png' %}">
                             <p>Edit Profile</p>
                             <span>></span>
                         </a>
-                        <a href="" class="sub-menu-link">
+                        <a href="{% url 'shopboutique:changepassword'%}" class="sub-menu-link">
                             <img src="{% static 'img3.jpg' %}">
                             <p>Change password</p>
                             <span>></span>
                         </a>
-                        <a href="" class="sub-menu-link">
+                        <a href="{% url 'shopboutique:logout'%}" class="sub-menu-link">
                             <img src="{% static 'img4.png' %}">
                             <p>Log Out</p>
                             <span>></span>

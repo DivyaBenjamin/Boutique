@@ -13,5 +13,7 @@ urlpatterns = [
     path('Adminreg/',views.adminreg,name="adminreg"),
     path('Assignstaff/<int:did>',views.assignstaff,name="assignstaff"),
     path('Viewfeedback/',views.viewfeedback,name="viewfeedback"),
+    path('stafflist/<int:eid>',views.stafflist,name="stafflist"),
     path('Viewbooking/',views.viewbooking,name="viewbooking"),
+    path('Assignwork/',views.assignwork,name="assignwork"),
 ]

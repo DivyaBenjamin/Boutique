@@ -60,13 +60,25 @@ def adminreg(request):
     else:
         return render(request,'Admin/Adminreg.html',{'data':data})
 
+
+def stafflist(request,eid):
+    stf_data=tbl_staffreg.objects.all()
+    bookingdata=tbl_bookingservice.objects.get(id=eid)
+    bid=bookingdata.id
+    request.session["bkid"]=bid
+    return render(request,'Admin/Assignstaff.html',{'stf_data':stf_data})
+
+
+
 def assignstaff(request,did):
-    staffdata=tbl_staffreg.objects.get(id=request.session["sid"])
-    bookingdata=tbl_assignstaff.objects.filter(booking__staff=staffdata)
-    booking_item=tbl_assignstaff.objects.get(id=did)
-    booking_item.assign_status=1
-    booking_item.save()
-    return render(request,'Admin/Viewbooking.html',{'bookingservice':bookingdata,'err':2})
+    bdata=tbl_bookingservice.objects.get(id=request.session["bkid"])
+    bdata.booking_status=1
+    bdata.save()
+    vid=bdata.id
+    stfdata=tbl_staffreg.objects.get(id=did)
+    tbl_assignstaff.objects.create(assign_status=1,staff=stfdata,booking=bdata)
+    return redirect('adminboutique:viewbooking')
+    
 
 def viewfeedback(request):
     user=tbl_user.objects.all()
@@ -76,3 +88,8 @@ def viewfeedback(request):
 def viewbooking(request):
     bookingdata=tbl_bookingservice.objects.all()
     return render(request,'Admin/Viewbooking.html',{'bookingservice':bookingdata})
+
+def assignwork(request):
+    booking=tbl_bookingservice.objects.all()
+    assigndata=tbl_assignstaff.objects.filter(assign_status=1)
+    return render(request,'Admin/Assignwork.html',{'assignstaff':assigndata})

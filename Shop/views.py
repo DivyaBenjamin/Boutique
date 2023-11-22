@@ -1,61 +1,62 @@
 from django.shortcuts import render,redirect
 from Shop.models import *
+from Admin.models import *
+from Userboutique.models import *
 # Create your views here.
 def shopboutique(request):
     return render(request,'Shop/Home.html')
 
-def addingstyles(request):
-    stylesdata=tbl_styles.objects.all()
-    typesofstyledata=tbl_typesof.objects.all()
-    if request.method=="POST":
-        sty=tbl_styles.objects.get(id=request.POST.get('Styles'))
-        typesof=tbl_typesof.objects.get(id=request.POST.get('typesof'))
-        tbl_addingstyles.objects.create(name=request.POST.get('name'),rate=request.POST.get('rate'),image=request.FILES.get('image'),typesof=typesof)
-        return render(request,'Shop/Addingstyles.html')
+def profile(request):
+    if 'sid' in request.session:
+        Staff=tbl_staffreg.objects.get(id=request.session['sid'])
+        return render(request,'Shop/Profile.html',{'i':Staff})
     else:
-        return render(request,'Shop/Addingstyles.html',{'sty':stylesdata,'typesof':typesofstyledata})
+        return redirect('webguest:login')
 
-def Ajaxstyles(request):
-    styles=tbl_styles.objects.get(id=request.GET.get('pisd'))
-    typesofstyle=tbl_typesof.objects.filter(styles=styles)
-    return render(request,'Shop/Ajaxstyles.html',{'typesof':typesofstyle})
-
-def addinghair(request):
-    haircutdata=tbl_haircuts.objects.all()
-    typesofhaircutdata=tbl_typesofhair.objects.all()
-    if request.method=="POST":
-        haircut=tbl_haircuts.objects.get(id=request.POST.get('haircuts'))
-        typesofhair=tbl_typesofhair.objects.get(id=request.POST.get('typesofhair'))
-        tbl_addinghair.objects.create(name=request.POST.get('name'),rate=request.POST.get('rate'),image=request.FILES.get('image'),haircuts=haircut,typesofhair=typesofhair)
-        return render(request,'Shop/Addinghair.html')
+def editprofile(request):
+    if 'sid' in request.session:
+        editstaff=tbl_staffreg.objects.get(id=request.session['sid'])
+        if request.method=="POST":
+            editstaff.name=request.POST.get('name')
+            editstaff.username=request.POST.get('username')
+            editstaff.save()
+            return redirect('shopboutique:editprofile')
+        else:
+            return render(request,'Shop/Editprofile.html',{'i':editstaff})
     else:
-        return render(request,'Shop/Addinghair.html',{'haircuts':haircutdata,'typesofhair':haircutdata})
+        return redirect('webguest:login')
 
-def Ajaxcut(request):
-    haircut=tbl_haircuts.objects.get(id=request.GET.get('cisd'))
-    typesofhair=tbl_typesofhair.objects.filter(haircuts=haircut)
-    return render(request,'Shop/Ajaxcut.html',{'typesofhair':typesofhair})
-
-def deletehair(request,aid):
-     tbl_haircoloring.objects.get(id=aid).delete()
-     return redirect('shopboutique:addinghair')
-
-def addingcolor(request):
-    haircoloringdata=tbl_haircoloring.objects.all()
-    typesofcolordata=tbl_typesofcoloring.objects.all()
-    if request.method=="POST":
-        haircoloring=tbl_haircoloring.objects.get(id=request.POST.get('haircoloring'))
-        typesofcolor=tbl_typesofcoloring.objects.get(id=request.POST.get('typesofhair'))
-        tbl_addingcoloring.objects.create(name=request.POST.get('name'),rate=request.POST.get('rate'),image=request.FILES.get('image'),haircoloring=haircoloring,typesofhair=typesofcolor)
-        return render(request,'Shop/Addingcolor.html')
+def changepassword(request):
+    if 'sid' in request.session:
+        staff=tbl_staffreg.objects.get(id=request.session['sid'])
+        if request.method=="POST":
+            if (staff.password)==(request.POST.get('currentpassword')):
+                if (request.POST.get('newpassword'))==(request.POST.get('confirmpassword')):
+                    staff.password=request.POST.get('confirmpassword')
+                    staff.save()
+                    return render(request,'Shop/Changepassword.html',{'err':3})
+                else:
+                    return render(request,'Shop/Changepassword.html',{'err':1})
+            else:
+                return render(request,'Shop/Changepassword.html',{'err':2})
+        else:
+            return render(request,'Shop/Changepassword.html',{'i':staff})
     else:
-        return render(request,'Shop/Addingcolor.html',{'haircoloring':haircoloringdata,'typesofhair':typesofcolordata})
+        return redirect('webguest:login')
 
-def deletehaircolor(request,bid):
-    tbl_addingcoloring.objects.get(id=bid).delete()
-    return redirect('shopboutique:addingcolor') 
+def viewfeedback(request):
+    user=tbl_user.objects.all()
+    feedbackdata=tbl_feedback.objects.filter(user_id__in=user)
+    return render(request,'Shop/Viewfeedback.html',{'feedback':feedbackdata})
 
-def Ajaxcolor(request):
-    haircoloring=tbl_haircoloring.objects.get(id=request.GET.get('hisd'))
-    typesofcoloring=tbl_typesofcoloring.objects.filter(typesofhair=haircoloring)
-    return render(request,'Shop/Ajaxcolor.html',{'addingcoloring':typesofcoloring})
+def viewassigned(request):
+    if 'sid' in request.session:
+        booking=tbl_bookingservice.objects.all()
+        assigndata=tbl_assignstaff.objects.filter(assign_status=1)
+        return render(request,'Shop/Viewassigned.html',{'assignstaff':assigndata})
+    else:
+        return redirect('webguest:login')
+
+def logout(request):
+    del request.session['sid']
+    return redirect('webguest:login')

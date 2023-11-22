@@ -190,7 +190,7 @@ body{
             <td>{{l.services.servicesdetail}}</td>
             <td>{{l.booking_date}}</td>
             <td>{{l.user.name}}</td>
-            <td><a href="{% url 'adminboutique:assignstaff' l.id %}">Assign Staff</a></td>
+            <td><a href="{% url 'adminboutique:stafflist' l.id %}">Assign Staff</a></td>
         </tr>
         {% endfor %}
     </table>

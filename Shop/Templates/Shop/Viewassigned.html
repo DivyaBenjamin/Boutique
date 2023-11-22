@@ -1,4 +1,4 @@
-{% extends 'Admin/Header.html' %}
+{% extends 'Shop/Header.html' %}
 {% load static %}
 {% block content%}
 <!DOCTYPE html>
@@ -173,24 +173,22 @@ body{
     </style>
 </head>
 <body>
-    <h3>Assign Staff</h3>
+    <h3>View Assigned Work</h3>
     {% csrf_token %}
     <form action="" method="post" enctype="multipart/form-data"></form>
     <table class="content-table">
         <tr>
             <th>#</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Username</th>
-            <th>Assign work</th>
+            <th>Client Name</th>
+            <th>Service</th>
+            <th>Booked Date</th>
         </tr>
-        {% for l in stf_data %}
+        {% for l in assignstaff %}
         <tr>
             <td>{{forloop.counter}}</td>
-            <td><img src="{{l.image.url}}" width="50" height="50"></td>
-            <td>{{l.name}}</td>
-            <td>{{l.username}}</td>
-            <td><a href="{% url 'adminboutique:assignstaff' l.id %}">Assign work</a></td>
+            <td>{{l.booking.user.name}}</td>
+            <td>{{l.booking.services.servicesdetail}}</td>
+            <td>{{l.booking.booked_date}}</td>
         </tr>
         {% endfor %}
     </table>
