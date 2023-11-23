@@ -2,9 +2,17 @@ from django.shortcuts import render,redirect
 from Shop.models import *
 from Admin.models import *
 from Userboutique.models import *
+
+from django.conf import settings
+from django.core.mail import send_mail
+from django.contrib import messages
+
 # Create your views here.
 def shopboutique(request):
-    return render(request,'Shop/Home.html')
+    if 'sid' in request.session:
+        return render(request,'Shop/Home.html')
+    else:
+        return redirect('webguest:login')
 
 def profile(request):
     if 'sid' in request.session:
@@ -34,6 +42,15 @@ def changepassword(request):
                 if (request.POST.get('newpassword'))==(request.POST.get('confirmpassword')):
                     staff.password=request.POST.get('confirmpassword')
                     staff.save()
+                    email=staff.email
+                    send_mail(
+                            'Respected Sir/Madam ',#subject
+                            "\rYour password is changed"
+                            "\r By"
+                            "\r AngelSusy" ,#body
+                            settings.EMAIL_HOST_USER,
+                            [email],
+                        )
                     return render(request,'Shop/Changepassword.html',{'err':3})
                 else:
                     return render(request,'Shop/Changepassword.html',{'err':1})
@@ -45,9 +62,12 @@ def changepassword(request):
         return redirect('webguest:login')
 
 def viewfeedback(request):
-    user=tbl_user.objects.all()
-    feedbackdata=tbl_feedback.objects.filter(user_id__in=user)
-    return render(request,'Shop/Viewfeedback.html',{'feedback':feedbackdata})
+    if 'sid' in request.session:
+        user=tbl_user.objects.all()
+        feedbackdata=tbl_feedback.objects.filter(user_id__in=user)
+        return render(request,'Shop/Viewfeedback.html',{'feedback':feedbackdata})
+    else:
+        return redirect('webguest:login')
 
 def viewassigned(request):
     if 'sid' in request.session:

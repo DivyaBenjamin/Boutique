@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect
 from Userboutique.models import *
 from Guest.models import *
-
+from django.conf import settings
+from django.core.mail import send_mail
+from django.contrib import messages
 # Create your views here.
 def Userboutique(request):
     if 'uid' in request.session:
@@ -99,6 +101,15 @@ def changepassword(request):
                 if (request.POST.get('newpassword'))==(request.POST.get('confirmpassword')):
                     user.password=request.POST.get('confirmpassword')
                     user.save()
+                    email=user.email
+                    send_mail(
+                            'Respected Sir/Madam ',#subject
+                            "\rYour password is changed"
+                            "\r By"
+                            "\r AngelSusy" ,#body
+                            settings.EMAIL_HOST_USER,
+                            [email],
+                        )
                     return render(request,'Userboutique/Changepassword.html',{'err':3})
                 else:
                     return render(request,'Userboutique/Changepassword.html',{'err':1})

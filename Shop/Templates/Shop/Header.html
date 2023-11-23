@@ -116,6 +116,9 @@
         overflow: hidden;
         transition: max-height 0.5s;
    }
+   .open-menu{
+	max-height: 400px !important;
+}
    .sub-menu-wrap .open-menu{
         max-height: 400px;
    }
@@ -261,7 +264,7 @@
                             <p>Change password</p>
                             <span>></span>
                         </a>
-                        <a href="" class="sub-menu-link">
+                        <a href="{% url 'shopboutique:logout' %}" class="sub-menu-link">
                             <img src="{% static 'img4.png' %}">
                             <p>Log Out</p>
                             <span>></span>
