@@ -13,4 +13,5 @@ urlpatterns = [
     path('Blog/',views.blog,name="blog"),
     path('Feedback/',views.feedback,name="feedback"),
     path('logout/',views.logout,name="logout"),
+    path('blogserializer/<int:qid>',views.blogserializer),
 ]

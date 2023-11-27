@@ -2,6 +2,11 @@ from django.shortcuts import redirect,render
 from Admin.models import *
 from Shop.models import *
 from Userboutique.models import *
+from django.http import JsonResponse
+from .serializers import typeserviceserializer
+from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.response import Response
 # Create your views here.
 def adminboutique(request):
     if 'aid' in request.session: 
@@ -112,3 +117,38 @@ def assignwork(request):
     booking=tbl_bookingservice.objects.all()
     assigndata=tbl_assignstaff.objects.filter(assign_status=1)
     return render(request,'Admin/Assignwork.html',{'assignstaff':assigndata})
+
+
+@api_view(['GET','POST'])
+def serviceserializer(request):
+    if request.method=='GET':
+     servicesdata=tbl_typesofservices.objects.all()
+     serializer=typeserviceserializer(servicesdata,many=True)
+     return JsonResponse(serializer.data,safe=False)
+    if request.method=='POST':
+        serializer=typeserviceserializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data,status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET','PUT','DELETE'])
+def upserviceserializer(request,eid):
+    try:
+        service=tbl_typesofservices.objects.get(id=eid)
+    except tbl_typesofservices.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method=='GET':
+        serializer=typeserviceserializer(service)
+        return Response(serializer.data)
+    elif request.method=='PUT':
+        serializer=typeserviceserializer(service,data=request.data)
+        if serializer.is_valid():
+         serializer.save()
+         return Response(serializer.data)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    elif request.method=='DELETE':
+        service.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+

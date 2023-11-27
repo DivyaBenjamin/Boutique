@@ -4,6 +4,11 @@ from Guest.models import *
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib import messages
+from django.http import JsonResponse
+from .serializers import blogserializer
+from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.response import Response
 # Create your views here.
 def Userboutique(request):
     if 'uid' in request.session:
@@ -34,9 +39,19 @@ def bookingservice(request,pid):
         serviceid=tbl_addservices.objects.get(id=pid)
         if request.method=="POST":
             tbl_bookingservice.objects.create(booked_date=request.POST.get('Bookeddate'),user=userdata,services=serviceid)
+            
+            email=userdata.email
+            send_mail(
+                        'Respected Sir/Madam ',#subject
+                        "\rYour sevice is booked and got appointment from Lavender Salon"
+                        "\r By"
+                        "\r AngelSusy" ,#body
+                        settings.EMAIL_HOST_USER,
+                        [email],
+                    )
             return redirect('Userboutique:Userboutique')
         else:
-            return render(request,'Userboutique/Bookingservice.html',{'err':2})
+            return render(request,'Userboutique/Bookingservice.html')
     else:
         return redirect('webguest:login')
 
@@ -123,3 +138,23 @@ def changepassword(request):
 def logout(request):
     del request.session['uid']
     return redirect('webguest:login')
+
+@api_view(['GET','PUT','DELETE'])
+def blogserializer(request,qid):
+    try:
+        service=tbl_typesofservices.objects.get(id=eid)
+    except tbl_typesofservices.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method=='GET':
+        serializer=typeserviceserializer(service)
+        return Response(serializer.data)
+    elif request.method=='PUT':
+        serializer=typeserviceserializer(service,data=request.data)
+        if serializer.is_valid():
+         serializer.save()
+         return Response(serializer.data)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    elif request.method=='DELETE':
+        service.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

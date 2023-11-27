@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Guest',
     'Admin',
     'Shop',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

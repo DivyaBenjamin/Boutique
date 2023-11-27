@@ -16,4 +16,6 @@ urlpatterns = [
     path('stafflist/<int:eid>',views.stafflist,name="stafflist"),
     path('Viewbooking/',views.viewbooking,name="viewbooking"),
     path('Assignwork/',views.assignwork,name="assignwork"),
+    path('serviceserializer/',views.serviceserializer),
+    path('serviceserializer/<int:eid>',views.upserviceserializer),
 ]
